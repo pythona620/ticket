@@ -36,3 +36,5 @@ def getstops(self,stops):
         
         nameList = [self.cleanString(board['fullname']) for board in boarding]
     return nameList if len(nameList) > 0 else None    
+def create_skill():
+    return NationalParksSkill()
