@@ -1,40 +1,24 @@
-from adapt.intent import IntentBuilder
+from mycroft import MycroftSkill, intent_file_handler
 
-from mycroft.skills.core import MycroftSkill
-from mycroft.util.log import getLogger
-from mycroft import intent_handler
-from mycroft.skills.context import adds_context, removes_context
-import requests
-import random
-import re
+class TestingSkill(MycroftSkill):
+    def __init__(self):
+        super().__init__()
 
-__author__ = 'pythona'
+    @intent_handler('what.is.a.prasad.intent')
+    def handle_what_is(self, message):
+        self.speak_dialog('prasad.description')
 
-LOGGER = getLogger(__name__)
+    @intent_handler('prasad.you.like.intent')
+    def handle_do_you_like(self, message):
+        tomato_type = message.data.get('type')
+        if tomato_type is not None:
+            self.speak_dialog('like.tomato.type',
+                              {'type': tomato_type})
+        else:
+            self.speak_dialog('like.tomato.generic')
 
+    def stop(self):
+        pass
 
-airports= {
-    "hyderabad"
-    "visakhapatnum"
-    "vijayawada"
-    "tirupathi"
-    "rajhamundri"
-}
-
-def getstops(self,stops):
-
-    nameList = []
-    airports = airports.get(stops)
-    if airports != None:
-
-    args = '&airports={}'.formats(airports)
-    boarding = self.getdata('board',args)
-
-    if boarding != None:
-
-        boarding = self.trimboarding(boarding)
-        
-        nameList = [self.cleanString(board['fullname']) for board in boarding]
-    return nameList if len(nameList) > 0 else None    
 def create_skill():
-    return NationalParksSkill()
+    return TestingSkill()
