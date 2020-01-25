@@ -1,33 +1,27 @@
-from mycroft import MycroftSkill, intent_file_handler
+from adapt.intent import IntentBuilder
+from mycroft.skills.core import MycroftSkill, intent_handler
+from mycroft.util.log import LOG, getLogger
 
-class TomatoSkill(MycroftSkill):
-    def __init__(self):
-        MycroftSkill.__init__(self)
+__author__ = 'pythona620/prasad'
+LOGGER = getLogger(__name__)
 
-#     def initialize(self):
-#         self.register_intent_file('what.is.a.prasad.intent', self.handle_what_is) #register the intentes
-#         self.register_intent_file('prasad.you.like.intent', self.handle_do_you_like) #register the intentes
+class TicketSkill(MycroftSkill):
+	def get_names(self, dialog):  #get input from mic
+		yip = self.get_response(dialog) 
+		return yip
+	
+	@intent_handler(IntentBuilder("").require("journy").optionally("travel"))
+	def handle_start_game_intent(self, message):
+		self.speak_dialog("start.journy")
 
-    
-#     def handle_what_is(self, message): 
-#         self.speak('your friend is going to some place') #not given place
+		# get myname
+		source = self.get_names("get.source")
+		# get myfriendname
+		destination = self.get_names("get.destination")
+		answer = source + destination #adding names
 
-#     def handle_do_you_like(self, message):
-#         first_type = message.data.get('from')  #get the first keword
-#         second_type = message.data.get('to') #get the second keword
-                     
-#         if first_type is not None:
-#             self.speak("your friend is going " + first_type  + " " + "to" + " "+  second_type ) #print specific keword
-#             self.speak(first_type + " "+second_type)
-#         else:
-#             self.speak('you are not given any specific word!') #print if specific keword is not given
-    def initialize(self):
-        self.register_entity_file('from.entity')  # TODO: Keep?
-#         self.recurrence_dict = self.translate_namedvalues('recurring')
-            
-            
-    def stop(self):
-        pass
-
+		self.speak_dialog("friends",{"answer":answer}) #output
+	def stop(self):		
+		pass
 def create_skill():
-    return TomatoSkill()
+	return TicketSkill()
