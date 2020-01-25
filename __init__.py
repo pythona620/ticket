@@ -18,7 +18,7 @@ class TicketSkill(MycroftSkill):
 		source = self.get_names("get.source")
 		# get myfriendname
 		destination = self.get_names("get.destination")
-		answer = source + destination #adding names
+		answer = source +" " + "to" + " " + destination #adding names
 
 		self.speak_dialog("friends",{"answer":answer}) #output
 	def stop(self):		
