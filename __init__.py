@@ -14,13 +14,15 @@ class TicketSkill(MycroftSkill):
 	def handle_start_game_intent(self, message):
 		self.speak_dialog("start.journy")
 
-		# get myname
+		# get source
 		source = self.get_names("get.source")
-		# get myfriendname
+		# get destination
 		destination = self.get_names("get.destination")
+		
+		
 		answer = source +" " + "to" + " " + destination #adding names
 
-		self.speak_dialog("friends",{"answer":answer}) #output
+		self.speak_dialog("trvout",{"answer":answer}) #output
 	def stop(self):		
 		pass
 def create_skill():
