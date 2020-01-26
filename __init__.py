@@ -11,7 +11,7 @@ class TicketSkill(MycroftSkill):
 		return yip
 	
 	@intent_handler(IntentBuilder("").require("journy").optionally("travel"))
-	def handle_start_game_intent(self, message):
+# 	def handle_start_game_intent(self, message):
 # 		self.speak_dialog("start.journy")
 		# get source
 # 		source = self.get_names("get.source")
@@ -19,7 +19,7 @@ class TicketSkill(MycroftSkill):
 # 		destination = self.get_names("get.destination")
 # 		answer = source +" " + "to" + " " + destination #adding names
 # 		self.speak_dialog("trvout",{"answer":answer}) #output
-		def  enter_source_destination(stops):
+	def  enter_source_destination(stops,message):
 		while True:
 			source = self.get_response("get.Enter your boarding bus stop:")
 			if source in stops:
@@ -39,5 +39,6 @@ class TicketSkill(MycroftSkill):
 	self.speak_dialog("tic",{{source} to {destination}})
 	def stop(self):		
 		pass
-def create_skill():
+	
+	def create_skill():
 	return TicketSkill()
