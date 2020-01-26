@@ -21,19 +21,22 @@ class TicketSkill(MycroftSkill):
 # 		self.speak_dialog("trvout",{"answer":answer}) #output
 		def  enter_source_destination(stops):
 		while True:
-			source = input('Enter your boarding bus stop: ')
+			source = self.get_response("get.Enter your boarding bus stop:")
 			if source in stops:
 				while True:
-					destination = input('Enter your destination: ')
+					destination = self.get_response("get.Enter your destination:")
 					if destination in stops:
 						return source, destination
 					else:
-					     print('Could you please enter a valid destination stop')
+					     print("Could you please enter a valid destination stop")
 					     continue
+			else:
+            		     print("Could you please enter a valid boarding point")
+            		     continue
  
-	stops = ['vizag', 'hyderabad', 'vijayawada']
+	stops = ["vizag", "hyderabad", "vijayawada"]
 	source, destination = enter_source_destination(stops)
-	print('The sourceing point is ', source, 'and the destination is ', destination)
+	self.speak_dialog("tic",{{source} to {destination}})
 	def stop(self):		
 		pass
 def create_skill():
