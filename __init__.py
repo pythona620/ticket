@@ -10,26 +10,25 @@ class multipleentitiesSkill(MycroftSkill):
     def handle_prasad_you_like(self, message):
         source = message.data.get('source')  #get the first keword
         destination = message.data.get('destination') #get the second keword.
-    if source is not None:
-        self.speak(source + " "+destination)             
-#     def handle_enter_source_destination(stops, message):
-#     while True:
-#         source = message.data.get('source')
-#         if source in stops:
-#             while True:
-#                 destination = message.data.get('destination')
-#                 if destination in stops:
-#                     return source, destination
-#                 else:
-#                     print('Could you please enter a valid destination stop')
-#                     continue
-#         else:
-#             print('Could you please enter a valid boarding point')
-#             continue
+              
+    def handle_enter_source_destination(self, stops):
+        while True:
+            source = message.data.get('source')
+            if source in stops:
+                while True:
+                    destination = message.data.get('destination')
+                    if destination in stops:
+                        return source, destination
+                    else:
+                        print('Could you please enter a valid destination stop')
+                        continue
+            else:
+                print('Could you please enter a valid boarding point')
+                continue
 
-#     stops = ['vizag', 'hyderabad', 'vijayawada']
-#     source, destination = enter_source_destination(stops)
-#     self.speak("The sourceing point is " + source + "and the destination is" +destination)
+    stops = ['vizag', 'hyderabad', 'vijayawada']
+    source, destination = enter_source_destination(stops)
+    self.speak("The sourceing point is " + source + "and the destination is" +destination)
 
 
     def stop(self):
