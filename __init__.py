@@ -1,3 +1,5 @@
+import json
+import sys
 from mycroft import MycroftSkill, intent_file_handler
 
 class TicketSkill(MycroftSkill):
@@ -7,16 +9,16 @@ class TicketSkill(MycroftSkill):
     def initialize(self):
         self.register_intent_file('prasad.you.like.intent', self.handle_prasad_you_like) #register the intentes
 
-    def handle_prasad_you_like(self):
+    def handle_prasad_you_like(self,message):
         source = message.data.get('source')  
         destination = message.data.get('dest')
-        self.speak (source,des)          
-    def handle_enter_source_destination(self, stops):
+        self.speak (source,destination)          
+    def handle_enter_source_destination(message,stops):
         while True:
             source = self.get_sourcebyuser("get.source")
             if source in stops:
                 while True:
-                    destination = self.get_destinationbyuser("get.dest")
+                    destination = self.get_destinationbyuser("get.destination")
                     if destination in stops:
                         return source, destination
                     else:
