@@ -7,7 +7,7 @@ class TicketSkill(MycroftSkill):
     def initialize(self):
         self.register_intent_file('prasad.you.like.intent', self.handle_prasad_you_like) #register the intentes
 
-    def handle_prasad_you_like(self, message):
+    def handle_prasad_you_like(self):
         source = message.data.get('source')  
         destination = message.data.get('destination')
         self.speak (source,destination)          
