@@ -1,45 +1,38 @@
-from adapt.intent import IntentBuilder
-from mycroft.skills.core import MycroftSkill, intent_handler
-from mycroft.util.log import LOG, getLogger
+from mycroft import MycroftSkill, intent_file_handler
 
-__author__ = 'pythona620/prasad'
-LOGGER = getLogger(__name__)
+class multipleentitiesSkill(MycroftSkill):
+    def __init__(self):
+        MycroftSkill.__init__(self)
 
-class TicketSkill(MycroftSkill):
-	def get_names(self, dialog):  #get input from mic
-		yip = self.get_response(dialog) 
-		return yip
-	
-	@intent_handler(IntentBuilder("").require("journy").optionally("travel"))
-# 	def handle_start_game_intent(self, message):
-# 		self.speak_dialog("start.journy")
-		# get source
-# 		source = self.get_names("get.source")
-		# get destination
-# 		destination = self.get_names("get.destination")
-# 		answer = source +" " + "to" + " " + destination #adding names
-# 		self.speak_dialog("trvout",{"answer":answer}) #output
-	def  handle_enter_source_destination_intent(stops,message):
-		self.speak_dialog("start.journy")
-		while True:
-			source = self.get_response("get.Enter your boarding bus stop:")
-			if source in stops:
-				while True:
-					destination = self.get_response("get.Enter your destination:")
-					if destination in stops:
-						return source, destination
-					else:
-					     print("Could you please enter a valid destination stop")
-					     continue
-			else:
-            		     print("Could you please enter a valid boarding point")
-            		     continue
- 
-	stops = ["vizag", "hyderabad", "vijayawada"]
-	source, destination = enter_source_destination(stops)
-	self.speak_dialog("tic",{{source} to {destination}})
-	def stop(self):		
-		pass
-	
-	def create_skill():
-	return TicketSkill()
+    def initialize(self):
+        self.register_intent_file('prasad.you.like.intent', self.handle_do_you_like) #register the intentes
+
+    def handle_prasad_you_like(self, message):
+        source = message.data.get('source')  #get the first keword
+        destination = message.data.get('destination') #get the second keword
+                     
+    def  enter_source_destination(stops, message):
+    while True:
+        source = message.data.get('source')
+        if source in stops:
+            while True:
+                destination = message.data.get('destination')
+                if destination in stops:
+                    return source, destination
+                else:
+                    print('Could you please enter a valid destination stop')
+                    continue
+        else:
+            print('Could you please enter a valid boarding point')
+            continue
+
+    stops = ['vizag', 'hyderabad', 'vijayawada']
+    source, destination = enter_source_destination(stops)
+    self.speak("The sourceing point is " + source + "and the destination is" +destination)
+
+
+    def stop(self):
+        pass
+
+def create_skill():
+    return multipleentitiesSkill()
