@@ -9,7 +9,8 @@ class multipleentitiesSkill(MycroftSkill):
 
     def handle_prasad_you_like(self, message):
         source = message.data.get('source')  #get the first keword
-        destination = message.data.get('destination') #get the second keword
+        destination = message.data.get('destination') #get the second keword.
+    if source is not None:
         self.speak(source + " "+destination)             
 #     def handle_enter_source_destination(stops, message):
 #     while True:
