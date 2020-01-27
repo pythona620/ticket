@@ -19,7 +19,7 @@ class TicketSkill(MycroftSkill):
 # 		destination = self.get_names("get.destination")
 # 		answer = source +" " + "to" + " " + destination #adding names
 # 		self.speak_dialog("trvout",{"answer":answer}) #output
-	def  enter_source_destination(stops,message):
+	def  handle_enter_source_destination(stops,message):
 		while True:
 			source = self.get_response("get.Enter your boarding bus stop:")
 			if source in stops:
