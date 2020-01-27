@@ -7,23 +7,23 @@ class multipleentitiesSkill(MycroftSkill):
     def initialize(self):
         self.register_intent_file('prasad.you.like.intent', self.handle_prasad_you_like) #register the intentes
 
-    def handle_prasad_you_like(self, message):
-        source = message.data.get('source')  #get the first keword
-        destination = message.data.get('destination') #get the second keword.
+#     def handle_prasad_you_like(self, message):
+#         source = message.data.get('source')  #get the first keword
+#         destination = message.data.get('destination') #get the second keword.
               
     def handle_enter_source_destination(self, stops):
         while True:
-            source = message.data.get('source')
+            source = self.getsourcebyuser('source')
             if source in stops:
                 while True:
-                    destination = message.data.get('destination')
+                    destination = self.getdestinationbyuser('destination')
                     if destination in stops:
                         return source, destination
                     else:
-                        print('Could you please enter a valid destination stop')
+                        self.speak('Could you please enter a valid destination stop')
                         continue
             else:
-                print('Could you please enter a valid boarding point')
+                self.speak('Could you please enter a valid boarding point')
                 continue
 
     stops = ['vizag', 'hyderabad', 'vijayawada']
