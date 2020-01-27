@@ -9,14 +9,14 @@ class TicketSkill(MycroftSkill):
 
     def handle_prasad_you_like(self):
         source = message.data.get('source')  
-        destination = message.data.get('destination')
-        self.speak (source,destination)          
+        destination = message.data.get('dest')
+        self.speak (source,des)          
     def handle_enter_source_destination(self, stops):
         while True:
             source = self.get_sourcebyuser("get.source")
             if source in stops:
                 while True:
-                    destination = self.get_destinationbyuser("get.destination")
+                    destination = self.get_destinationbyuser("get.dest")
                     if destination in stops:
                         return source, destination
                     else:
