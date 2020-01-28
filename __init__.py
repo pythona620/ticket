@@ -1,26 +1,28 @@
-import json
-import sys
-from mycroft import MycroftSkill, intent_file_handler
+from adapt.intent import IntentBuilder
+from mycroft import MycroftSkill, intent_file_handler, intent_handler
 
 class TicketSkill(MycroftSkill):
+
     def __init__(self):
-        MycroftSkill.__init__(self)
+        super(TicketSkill,self).__init__()
 
     def initialize(self):
-        self.register_intent_file('prasad.you.like.intent', self.handle_prasad_you_like) #register the intentes
+        self.register_entity_file('source.entity')
+        self.register_entity_file('destination.entity')
 
-    def handle_prasad_you_like(self,message):
-        source = message.data.get('source')  
-        destination = message.data.get('dest')
-        self.speak (source,destination)          
-    def handle_enter_source_destination(message,stops):
-        while True:
-            source = self.get_sourcebyuser("get.source")
+    
+
+
+    @intent_handler(IntentBuilder("").require("journy").optionally("travel"))
+
+    def plan_tour(self,sour,dest):
+        while (source == sour):
+            source = self.get_sourcebyuser("get.sour")
             if source in stops:
-                while True:
-                    destination = self.get_destinationbyuser("get.destination")
+                while (destination == dest):
+                    destination = self.get_destinationbyuser("get.dest")
                     if destination in stops:
-                        return source, destination
+                        return sour, dest
                     else:
                         self.speak('Could you please enter a valid destination stop')
                         continue
@@ -28,11 +30,9 @@ class TicketSkill(MycroftSkill):
                 self.speak('Could you please enter a valid boarding point')
                 continue
 
-    self.speak("The source point is " + source + "and the destination is" +destination)
-    source, destination = enter_source_destination(stops)
-
+    self.speak("The source point is " + sour + "and the destination is" +dest)
     def stop(self):
-        stops = ['vizag', 'hyderabad', 'vijayawada']
+        
         pass
 
 def create_skill():
