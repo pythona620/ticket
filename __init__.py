@@ -16,10 +16,10 @@ class TicketSkill(MycroftSkill):
     @intent_handler(IntentBuilder("").require("journy").optionally("travel"))
 
     def plan_tour(self,sour,dest):
-        while (source == sour):
+        while true:
             source = self.get_sourcebyuser("get.sour")
             if source in stops:
-                while (destination == dest):
+                while true:
                     destination = self.get_destinationbyuser("get.dest")
                     if destination in stops:
                         return sour, dest
