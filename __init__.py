@@ -5,13 +5,10 @@ class TicketSkill(MycroftSkill):
 
     def __init__(self):
         super(TicketSkill,self).__init__()
-
+        stops = ["hyderabad","visakhapatnum","vijayawada","tirupathi","rajhamundri"]
     def initialize(self):
         self.register_entity_file('source.entity')
         self.register_entity_file('destination.entity')
-
-    
-
 
     @intent_handler(IntentBuilder("").require("journy").optionally("travel"))
 
@@ -30,7 +27,7 @@ class TicketSkill(MycroftSkill):
                 self.speak('Could you please enter a valid boarding point')
                 continue
 
-    self.speak("The source point is " + sour + "and the destination is" +dest)
+    self.speak("The source point is " + source + "and the destination is" + destination)
     def stop(self):
         
         pass
