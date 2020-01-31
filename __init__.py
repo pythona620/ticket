@@ -12,9 +12,9 @@ class ticketSkill(MycroftSkill):
 	def handle_start_game_intent(self, message):
 		self.speak_dialog("start.game")
 		# get lower bound
-	lowerBound = self.get_numerical_response("get.lower")
+		lowerBound = self.get_numerical_response("get.lower")
 		# get myfriendname
-	upperBound = self.get_numerical_response("get.upper")
+		upperBound = self.get_numerical_response("get.upper")
 	def  enter_source_destination(self,stops):
     	while True:
         	source = lowerBound
